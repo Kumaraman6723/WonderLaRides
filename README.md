@@ -10,10 +10,11 @@ Check out the live project here:
 
 ## 🛠️ Tech Stack
 
-- **Next.js** – React framework for server-side rendering and routing  
-- **TypeScript** – Strongly typed JavaScript for better development experience  
-- **Tailwind CSS** – Utility-first CSS framework for rapid UI styling  
-- **Vercel** – Deployment platform for frontend projects
+- **React.js** – JavaScript library for building user interfaces  
+- **TypeScript** – Strongly typed JavaScript for scalable development  
+- **Tailwind CSS** – Utility-first CSS framework for modern styling  
+- **Vite** – Fast build tool and dev server  
+- **Vercel** – Hosting platform for frontend projects
 
 ## 🧑‍💻 How to Run Locally
 
@@ -28,4 +29,4 @@ npm install
 # 3. Start the development server
 npm run dev
 
-# The app will run on http://localhost:5174
+# The app will be running on http://localhost:5174
