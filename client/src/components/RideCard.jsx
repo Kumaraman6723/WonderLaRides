@@ -51,12 +51,21 @@ const RideCard = ({ ride }) => {
         <p className="text-sm text-white mb-4">{ride.description}</p>
 
         <motion.button
-          className="bg-yellow-400 hover:bg-yellow-500 text-black font-medium text-xs py-2 px-4 rounded-md w-full"
+          className="bg-yellow-400 hover:bg-yellow-500 text-black font-medium text-xs rounded-md w-[150px] h-[40px] text-center "
           whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.97 }}
           transition={{ type: "spring", stiffness: 400, damping: 17 }}
         >
-          RIDE DETAILS
+          <span
+            style={{
+              color: "#334DCF",
+              fontFamily: "Poppins, sans-serif",
+              fontWeight: 600,
+              fontSize: "0.75rem",
+            }}
+          >
+            RIDE DETAILS
+          </span>
         </motion.button>
       </div>
     </motion.div>
