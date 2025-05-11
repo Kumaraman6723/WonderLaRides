@@ -25,33 +25,37 @@ const CategorySidebar = ({ activeCategory, setActiveCategory }) => {
       name: "Land",
       icon: "https://wonderla.vercel.app/icons/landRides.svg",
       count: 74,
-      position: { top: "90px", right: "90px" },
+      position: { top: "90px", right: "150px" },
     },
     {
       id: "water",
       name: "Water",
       icon: "https://wonderla.vercel.app/icons/waterRides.svg",
       count: 55,
-      position: { top: "265px", right: "20px" },
+      position: { top: "265px", right: "85px" },
     },
     {
       id: "kids",
       name: "Kids",
       icon: "https://wonderla.vercel.app/icons/kidsRides.svg",
       count: 36,
-      position: { top: "440px", right: "90px" },
+      position: { top: "440px", right: "150px" },
     },
   ];
 
+  // const handleCategoryChange = newCategory => {
+
+  // }
+  // conic-gradient(from 0deg, rgb(232, 233, 241) -5deg, rgb(250, 213, 0) 65deg, rgb(250, 213, 0) 115deg, rgb(232, 233, 241) 185deg, rgb(232, 233, 241))
   return (
     <div className="relative hidden md:block overflow-visible">
       <div
-        className={`size-[600px] bg-white absolute  origin-center transition-all duration-500  rounded-full right-0 ${rotateSelection[activeCategory]} `}
+        className={`size-[600px] bg-white absolute  origin-center transition-all duration-500   rounded-full right-[20%] ${rotateSelection[activeCategory]} `}
         style={{
           background: `conic-gradient(
             from 0deg,
             rgb(232, 233, 241) -5deg,
-            rgb(250, 213, 0) 55deg,
+            rgb(250, 213, 0) 65deg,
             rgb(250, 213, 0) 115deg,
             rgb(232, 233, 241) 185deg,
             rgb(232, 233, 241)
@@ -80,11 +84,12 @@ const CategorySidebar = ({ activeCategory, setActiveCategory }) => {
                 zIndex: 2,
               }}
             >
-              <div className="flex ">
+              <div className="flex  ">
                 <motion.div
                   className={`rounded-full flex items-center justify-center cursor-pointer transition-all overflow-visible relative
                     ${isActive ? "" : ""}
                     `}
+                  style={{}}
                   onClick={() => setActiveCategory(category.id)}
                 >
                   <img
@@ -96,10 +101,14 @@ const CategorySidebar = ({ activeCategory, setActiveCategory }) => {
                   />
                 </motion.div>
                 <div className=" absolute translate-x-[150%]">
-                  <h3 className="text-white font-semibold text-lg drop-shadow-md uppercase">
+                  <h3
+                    className={`text-white font-semibold text-lg drop-shadow-md font-poppins ${
+                      category.name === "Kids" ? "px-5" : ""
+                    }`}
+                  >
                     {category.name}
                   </h3>
-                  <span className="bg-[#93C5FD] text-[#0F172A] px-3 py-1 block flex w-20 border  rounded-full text-xs font-medium shadow-md uppercase mt-3">
+                  <span className="bg-[#788BEB] text-[#FFFFFF] px-3 py-1 block flex w-20   rounded-full text-xs font-medium shadow-md uppercase mt-3">
                     {category.count} Rides
                   </span>
                 </div>

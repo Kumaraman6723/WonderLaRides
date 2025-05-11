@@ -22,13 +22,20 @@ const RidesSection = () => {
   }, [activeCategory]);
 
   useEffect(() => {
-    if (isAutoScrolling && filteredRides.length > 5) {
+    if (isAutoScrolling && filteredRides.length > 0) {
       autoScrollTimerRef.current = setInterval(() => {
         if (carouselRef.current) {
-          carouselRef.current.scrollBy({
-            left: scrollOffset,
-            behavior: "smooth",
-          });
+          const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
+          const isAtEnd = scrollLeft + clientWidth >= scrollWidth - 10;
+
+          if (isAtEnd) {
+            carouselRef.current.scrollTo({ left: 0, behavior: "smooth" });
+          } else {
+            carouselRef.current.scrollBy({
+              left: scrollOffset,
+              behavior: "smooth",
+            });
+          }
         }
       }, 2500);
     }
@@ -38,9 +45,34 @@ const RidesSection = () => {
 
   const handleManualScroll = (direction) => {
     setIsAutoScrolling(false);
+
     if (carouselRef.current) {
-      const offset = direction === "next" ? scrollOffset : -scrollOffset;
-      carouselRef.current.scrollBy({ left: offset, behavior: "smooth" });
+      const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
+      const isAtEnd = scrollLeft + clientWidth >= scrollWidth - 10;
+      const isAtStart = scrollLeft <= 10;
+
+      if (direction === "next") {
+        if (isAtEnd) {
+          carouselRef.current.scrollTo({ left: 0, behavior: "smooth" });
+        } else {
+          carouselRef.current.scrollBy({
+            left: scrollOffset,
+            behavior: "smooth",
+          });
+        }
+      } else {
+        if (isAtStart) {
+          carouselRef.current.scrollTo({
+            left: scrollWidth,
+            behavior: "smooth",
+          });
+        } else {
+          carouselRef.current.scrollBy({
+            left: -scrollOffset,
+            behavior: "smooth",
+          });
+        }
+      }
     }
 
     if (autoScrollTimerRef.current) {
@@ -48,7 +80,7 @@ const RidesSection = () => {
     }
     autoScrollTimerRef.current = setTimeout(() => {
       setIsAutoScrolling(true);
-    }, 8000);
+    }, 6000);
   };
 
   return (
@@ -62,14 +94,14 @@ const RidesSection = () => {
         </div>
 
         <div className="w-full md:w-3/4 p-8">
-          <div className="flex justify-between items-center mb-1  pl-3 ">
+          <div className="flex justify-between items-center mb-1 pl-3">
             <motion.h2
               className="font-extrabold text-white uppercase"
               style={{
                 fontFamily: "Poppins, Inter, Arial, sans-serif",
                 fontStyle: "normal",
                 fontWeight: 900,
-                fontSize: "60px", // ~56px
+                fontSize: "60px",
                 letterSpacing: "-0.03em",
                 marginTop: "0.5rem",
                 marginBottom: "1.5rem",
@@ -88,9 +120,10 @@ const RidesSection = () => {
             />
           </div>
 
-          <div className="relative overflow-hidden">
+          <div className="relative">
+            {/* Remove overflow-hidden from parent container */}
             <motion.div
-              className="flex gap-5 px-4 overflow-hidden cursor-grab active:cursor-grabbing"
+              className="flex gap-5 px-4 cursor-grab active:cursor-grabbing"
               drag="x"
               dragConstraints={{ left: 0, right: 0 }}
               ref={carouselRef}
@@ -102,9 +135,23 @@ const RidesSection = () => {
                 }
                 autoScrollTimerRef.current = setTimeout(() => {
                   setIsAutoScrolling(true);
-                }, 4000);
+                }, 2000);
+              }}
+              style={{
+                // Allow horizontal scrolling
+                overflowX: "auto",
+                // Hide scrollbars
+                scrollbarWidth: "none",
+                msOverflowStyle: "none",
               }}
             >
+              {/* Hide scrollbar for Webkit browsers */}
+              <style jsx>{`
+                .flex::-webkit-scrollbar {
+                  display: none;
+                }
+              `}</style>
+
               {filteredRides.map((ride) => (
                 <motion.div
                   key={ride.id}
