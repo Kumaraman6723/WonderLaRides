@@ -39,15 +39,18 @@ const CategorySidebar = ({ activeCategory, setActiveCategory }) => {
       name: "Kids",
       icon: "https://wonderla.vercel.app/icons/kidsRides.svg",
       count: 36,
-      position: { top: "440px", right: "90px" },
+      position: { top: "440px", right: "150px" },
     },
   ];
 
+  // const handleCategoryChange = newCategory => {
+
+  // }
+// conic-gradient(from 0deg, rgb(232, 233, 241) -5deg, rgb(250, 213, 0) 65deg, rgb(250, 213, 0) 115deg, rgb(232, 233, 241) 185deg, rgb(232, 233, 241))
   return (
     <div className="relative hidden md:block overflow-visible">
-      <div
-        className={`size-[600px] bg-white absolute  origin-center transition-all duration-500  rounded-full right-0 ${rotateSelection[activeCategory]} `}
-        style={{
+
+    <div className={`size-[600px] bg-white absolute  origin-center transition-all duration-500   rounded-full right-[20%] ${ rotateSelection[activeCategory] } `}     style={{
           background: `conic-gradient(
             from 0deg,
             rgb(232, 233, 241) -5deg,
@@ -116,11 +119,19 @@ const CategorySidebar = ({ activeCategory, setActiveCategory }) => {
                 zIndex: 2,
               }}
             >
-              <div className="flex ">
+        
+              <div className="flex  ">
                 <motion.div
                   className={`rounded-full flex items-center justify-center cursor-pointer transition-all overflow-visible relative
                     ${ isActive? '' : '' }
                     `}
+                  style={{
+                    // width: isActive ? 112 : 80,
+                    // height: isActive ? 112 : 80,
+                    // borderWidth: isActive ? 4 : 2,
+                    // borderColor: isActive ? "#FFD700" : "white",
+                    // borderStyle: "solid",
+                  }}
                   onClick={() => setActiveCategory(category.id)}
                   // whileHover={{ scale: 1.05 }}
                   // whileTap={{ scale: 0.95 }}
