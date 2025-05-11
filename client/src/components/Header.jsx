@@ -76,7 +76,7 @@ const Header = () => {
 
   return (
     <>
-      <header className="bg-white py-2 px-8 flex justify-between items-center rounded-full mx-6 my-3 shadow-md">
+      <header className="bg-white py-2 px-8 flex justify-between items-center rounded-2xl mx-6 my-10 shadow-md">
         <div className="logo">
           <img
             src="https://d22pimhl2qmbj7.cloudfront.net/public/Main_Logo_0ad2299b54.png?w=256&q=75"

@@ -11,10 +11,10 @@ const getArcOffset = (angleDeg, radius = 15) => {
 };
 
 const rotateSelection = {
-  land : 'rotate-[-45deg]',
-  water: 'rotate-none',
-  kids: 'rotate-[45deg]'
-}
+  land: "rotate-[-45deg]",
+  water: "rotate-none",
+  kids: "rotate-[45deg]",
+};
 
 const CategorySidebar = ({ activeCategory, setActiveCategory }) => {
   const [hoveredCategory, setHoveredCategory] = useState(null);
@@ -25,47 +25,45 @@ const CategorySidebar = ({ activeCategory, setActiveCategory }) => {
       name: "Land",
       icon: "https://wonderla.vercel.app/icons/landRides.svg",
       count: 74,
-      position: { top: "90px", right: "150px" },
+      position: { top: "90px", right: "90px" },
     },
     {
       id: "water",
       name: "Water",
       icon: "https://wonderla.vercel.app/icons/waterRides.svg",
       count: 55,
-      position: { top: "265px", right: "85px" },
+      position: { top: "265px", right: "20px" },
     },
     {
       id: "kids",
       name: "Kids",
       icon: "https://wonderla.vercel.app/icons/kidsRides.svg",
       count: 36,
-      position: { top: "440px", right: "165px" },
+      position: { top: "440px", right: "90px" },
     },
   ];
 
-  
   return (
     <div className="relative hidden md:block overflow-visible">
-
-    <div className={`size-[600px] bg-white absolute  origin-center transition-all duration-500   rounded-full right-[20%] ${ rotateSelection[activeCategory] } `}     style={{
+      <div
+        className={`size-[600px] bg-white absolute  origin-center transition-all duration-500  rounded-full right-0 ${rotateSelection[activeCategory]} `}
+        style={{
           background: `conic-gradient(
             from 0deg,
             rgb(232, 233, 241) -5deg,
-            rgb(250, 213, 0) 65deg,
+            rgb(250, 213, 0) 55deg,
             rgb(250, 213, 0) 115deg,
             rgb(232, 233, 241) 185deg,
             rgb(232, 233, 241)
           )`,
-        }} >
-      <div className="size-[420px] bg-[#1E293B] absolute transition-all duration-300 rounded-full top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 " >
-        <div className="size-[160px]  bg-yellow-400 absolute flex right-[-27%] rounded-full top-1/2 -translate-y-1/2 " >
-          <div className="size-[140px] bg-white rounded-full m-auto" >
-
+        }}
+      >
+        <div className="size-[420px] bg-[#1E293B] absolute transition-all duration-300 rounded-full top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 ">
+          <div className="size-[160px]  bg-yellow-400 absolute flex right-[-27%] rounded-full top-1/2 -translate-y-1/2 ">
+            <div className="size-[140px] bg-white rounded-full m-auto"></div>
           </div>
         </div>
       </div>
-      </div>  
-     
 
       {/* Category Items */}
       <div className="relative z-10">
@@ -82,20 +80,19 @@ const CategorySidebar = ({ activeCategory, setActiveCategory }) => {
                 zIndex: 2,
               }}
             >
-        
-              <div className="flex  ">
+              <div className="flex ">
                 <motion.div
                   className={`rounded-full flex items-center justify-center cursor-pointer transition-all overflow-visible relative
-                    ${ isActive? '' : '' }
+                    ${isActive ? "" : ""}
                     `}
-                  
                   onClick={() => setActiveCategory(category.id)}
-                 
                 >
                   <img
                     src={category.icon}
                     alt={`${category.name} Rides`}
-                    className={`transition-all  duration-300  ${ isActive ? 'scale-[1.4]' : '' }`}
+                    className={`transition-all  duration-300  ${
+                      isActive ? "scale-[1.4]" : ""
+                    }`}
                   />
                 </motion.div>
                 <div className=" absolute translate-x-[150%]">
@@ -110,10 +107,9 @@ const CategorySidebar = ({ activeCategory, setActiveCategory }) => {
             </motion.div>
           );
         })}
-      </div> 
+      </div>
     </div>
   );
-
 };
 
 export default CategorySidebar;

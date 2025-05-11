@@ -52,7 +52,7 @@ const RidesSection = () => {
   };
 
   return (
-    <main className="relative bg-[#1A2642] min-h-[800px] overflow-hidden">
+    <main className="relative bg-[#253251] min-h-[800px] overflow-hidden">
       <div className="flex justify-between">
         <div className="w-80 md:block hidden pt-10">
           <CategorySidebar
@@ -62,9 +62,19 @@ const RidesSection = () => {
         </div>
 
         <div className="w-full md:w-3/4 p-8">
-          <div className="flex justify-between items-center mb-20 pl-3 ">
+          <div className="flex justify-between items-center mb-1  pl-3 ">
             <motion.h2
-              className="text-5xl font-extrabold text-white uppercase"
+              className="font-extrabold text-white uppercase"
+              style={{
+                fontFamily: "Poppins, Inter, Arial, sans-serif",
+                fontStyle: "normal",
+                fontWeight: 900,
+                fontSize: "60px", // ~56px
+                letterSpacing: "-0.03em",
+                marginTop: "0.5rem",
+                marginBottom: "1.5rem",
+                lineHeight: 1.1,
+              }}
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
