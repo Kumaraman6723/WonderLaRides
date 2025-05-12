@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, animate } from "framer-motion";
 import CategorySidebar from "./CategorySidebar";
 import CarouselControls from "./CarouselControls";
 import RideCard from "./RideCard";
@@ -11,31 +11,41 @@ const RidesSection = () => {
   const [isAutoScrolling, setIsAutoScrolling] = useState(true);
   const carouselRef = useRef();
   const autoScrollTimerRef = useRef(null);
-  const scrollOffset = 260; // Width per card approx.
+  const scrollOffset = 249;
+  const dragX = useMotionValue(0);
+  const [constraint, setConstraint] = useState(0);
+  const startX = useRef(0);
 
   useEffect(() => {
     const filtered = rides.filter((ride) => ride.category === activeCategory);
     setFilteredRides(filtered);
     if (carouselRef.current) {
       carouselRef.current.scrollTo({ left: 0, behavior: "smooth" });
+      dragX.set(0);
     }
   }, [activeCategory]);
 
   useEffect(() => {
+    // Update constraints when filtered rides change
+    if (filteredRides.length > 0) {
+      const containerWidth = carouselRef.current?.clientWidth || 0;
+      const contentWidth = filteredRides.length * scrollOffset;
+      setConstraint(contentWidth - containerWidth + scrollOffset);
+    }
+  }, [filteredRides]);
+
+  useEffect(() => {
     if (isAutoScrolling && filteredRides.length > 0) {
       autoScrollTimerRef.current = setInterval(() => {
-        if (carouselRef.current) {
-          const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
-          const isAtEnd = scrollLeft + clientWidth >= scrollWidth - 10;
+        const currentX = dragX.get();
+        const containerWidth = carouselRef.current?.clientWidth || 0;
+        const contentWidth = filteredRides.length * scrollOffset;
+        const maxScroll = contentWidth - containerWidth + scrollOffset;
 
-          if (isAtEnd) {
-            carouselRef.current.scrollTo({ left: 0, behavior: "smooth" });
-          } else {
-            carouselRef.current.scrollBy({
-              left: scrollOffset,
-              behavior: "smooth",
-            });
-          }
+        if (currentX <= -maxScroll + 11) {
+          animate(dragX, 0, { duration: 0.7 });
+        } else {
+          animate(dragX, currentX - scrollOffset, { duration: 0.7 });
         }
       }, 2500);
     }
@@ -46,32 +56,22 @@ const RidesSection = () => {
   const handleManualScroll = (direction) => {
     setIsAutoScrolling(false);
 
-    if (carouselRef.current) {
-      const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
-      const isAtEnd = scrollLeft + clientWidth >= scrollWidth - 10;
-      const isAtStart = scrollLeft <= 10;
+    const currentX = dragX.get();
+    const containerWidth = carouselRef.current?.clientWidth || 0;
+    const contentWidth = filteredRides.length * scrollOffset;
+    const maxScroll = contentWidth - containerWidth + scrollOffset;
 
-      if (direction === "next") {
-        if (isAtEnd) {
-          carouselRef.current.scrollTo({ left: 0, behavior: "smooth" });
-        } else {
-          carouselRef.current.scrollBy({
-            left: scrollOffset,
-            behavior: "smooth",
-          });
-        }
+    if (direction === "next") {
+      if (currentX <= -maxScroll + 11) {
+        animate(dragX, 0, { duration: 0.7 });
       } else {
-        if (isAtStart) {
-          carouselRef.current.scrollTo({
-            left: scrollWidth,
-            behavior: "smooth",
-          });
-        } else {
-          carouselRef.current.scrollBy({
-            left: -scrollOffset,
-            behavior: "smooth",
-          });
-        }
+        animate(dragX, currentX - scrollOffset, { duration: 0.7 });
+      }
+    } else {
+      if (currentX >= -10) {
+        animate(dragX, -maxScroll, { duration: 0.7 });
+      } else {
+        animate(dragX, currentX + scrollOffset, { duration: 0.7 });
       }
     }
 
@@ -80,7 +80,7 @@ const RidesSection = () => {
     }
     autoScrollTimerRef.current = setTimeout(() => {
       setIsAutoScrolling(true);
-    }, 6000);
+    }, 5000);
   };
 
   return (
@@ -120,29 +120,47 @@ const RidesSection = () => {
             />
           </div>
 
-          <div className="relative">
-            {/* Remove overflow-hidden from parent container */}
+          <div className="relative overflow-hidden">
             <motion.div
               className="flex gap-5 px-4 cursor-grab active:cursor-grabbing"
               drag="x"
-              dragConstraints={{ left: 0, right: 0 }}
+              dragConstraints={{
+                left: -constraint,
+                right: 0,
+              }}
               ref={carouselRef}
+              style={{
+                x: dragX,
+                display: "flex",
+                gap: "1.25rem",
+                padding: "1rem",
+              }}
               whileTap={{ cursor: "grabbing" }}
-              onDrag={() => setIsAutoScrolling(false)}
-              onDragEnd={() => {
+              onDragStart={() => {
+                setIsAutoScrolling(false);
+                startX.current = dragX.get();
+              }}
+              onDragEnd={(_, info) => {
+                const threshold = 50; // Minimum drag distance to consider as intentional swipe
+                const velocityThreshold = 500; // Minimum velocity to consider as swipe
+
+                if (
+                  Math.abs(info.offset.x) < threshold &&
+                  Math.abs(info.velocity.x) < velocityThreshold
+                ) {
+                  // Return to original position if not dragged significantly
+                  animate(dragX, startX.current, {
+                    type: "spring",
+                    bounce: 0.5,
+                  });
+                }
+
                 if (autoScrollTimerRef.current) {
                   clearTimeout(autoScrollTimerRef.current);
                 }
                 autoScrollTimerRef.current = setTimeout(() => {
                   setIsAutoScrolling(true);
                 }, 2000);
-              }}
-              style={{
-                // Allow horizontal scrolling
-                overflowX: "auto",
-                // Hide scrollbars
-                scrollbarWidth: "none",
-                msOverflowStyle: "none",
               }}
             >
               {/* Hide scrollbar for Webkit browsers */}
@@ -155,7 +173,7 @@ const RidesSection = () => {
               {filteredRides.map((ride) => (
                 <motion.div
                   key={ride.id}
-                  className="min-w-[200px] max-w-[260px] shrink-0"
+                  className="min-w-[260px] max-w-[260px] shrink-0"
                   whileHover={{ scale: 1.05 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
