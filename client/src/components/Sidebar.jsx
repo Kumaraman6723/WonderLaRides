@@ -21,6 +21,7 @@ const Sidebar = ({ isOpen, onClose }) => {
       }`}
     >
       {/* Header with logo and close button */}
+      {/* Header with logo and close button */}
       <div className="p-4 flex justify-between items-center border-b">
         <div className="logo">
           <img
@@ -29,10 +30,14 @@ const Sidebar = ({ isOpen, onClose }) => {
             className="h-20"
           />
         </div>
-        <button onClick={onClose} className="text-gray-700">
+        <button
+          onClick={onClose}
+          className="text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-full p-2 transition-colors"
+          aria-label="Close sidebar"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className=""
+            className="h-6 w-6"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
