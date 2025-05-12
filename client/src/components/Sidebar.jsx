@@ -1,14 +1,5 @@
 import React, { useState } from "react";
-import {
-  ChevronDown,
-  ChevronUp,
-  Users,
-  Info,
-  Link2,
-  PhoneCall,
-  Clock,
-  Building,
-} from "lucide-react";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 const Sidebar = ({ isOpen, onClose }) => {
   const [expandedSections, setExpandedSections] = useState({
@@ -41,7 +32,7 @@ const Sidebar = ({ isOpen, onClose }) => {
         <button onClick={onClose} className="text-gray-700">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
+            className=""
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -64,19 +55,11 @@ const Sidebar = ({ isOpen, onClose }) => {
             onClick={() => toggleSection("parks")}
           >
             <div className="flex items-center text-blue-600">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 mr-3"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                <polyline points="9 22 9 12 15 12 15 22"></polyline>
-              </svg>
+              <img
+                src="https://d22pimhl2qmbj7.cloudfront.net/public/playground_e8b25627b1.svg?w=32&q=75"
+                className=" mr-3"
+                alt="Parks"
+              />
               <div>
                 <h3 className="font-medium">Parks</h3>
                 <p className="text-xs text-gray-600">
@@ -152,7 +135,11 @@ const Sidebar = ({ isOpen, onClose }) => {
         {/* Resorts Section */}
         <div className="flex items-center justify-between p-4 border-b cursor-pointer">
           <div className="flex items-center text-blue-600">
-            <Building className="h-6 w-6 mr-3" />
+            <img
+              src="https://d22pimhl2qmbj7.cloudfront.net/public/city_45e0a87cc8.svg?w=32&q=75"
+              className=" mr-3"
+              alt="Resorts"
+            />
             <div>
               <h3 className="font-medium">Resorts</h3>
               <p className="text-xs text-gray-600">
@@ -165,21 +152,11 @@ const Sidebar = ({ isOpen, onClose }) => {
         {/* Offers & Combos Section */}
         <div className="flex items-center justify-between p-4 border-b cursor-pointer">
           <div className="flex items-center text-blue-600">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 mr-3"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-              <line x1="16" y1="2" x2="16" y2="6"></line>
-              <line x1="8" y1="2" x2="8" y2="6"></line>
-              <line x1="3" y1="10" x2="21" y2="10"></line>
-            </svg>
+            <img
+              src="https://d22pimhl2qmbj7.cloudfront.net/public/discount_e3ac599ad9.svg?w=32&q=75"
+              className=" mr-3"
+              alt="Offers"
+            />
             <div>
               <h3 className="font-medium">Offers & Combos</h3>
               <p className="text-xs text-gray-600">
@@ -192,7 +169,11 @@ const Sidebar = ({ isOpen, onClose }) => {
         {/* Timings Section */}
         <div className="flex items-center justify-between p-4 border-b cursor-pointer">
           <div className="flex items-center text-blue-600">
-            <Clock className="h-6 w-6 mr-3" />
+            <img
+              src="https://d22pimhl2qmbj7.cloudfront.net/public/time_68af0a1a84.svg?w=32&q=75"
+              className=" mr-3"
+              alt="Timings"
+            />
             <div>
               <h3 className="font-medium">Timings And Guidelines</h3>
               <p className="text-xs text-gray-600">
@@ -205,7 +186,11 @@ const Sidebar = ({ isOpen, onClose }) => {
         {/* Group Booking - Yellow background */}
         <div className="p-4 border-b bg-[#FFD700] cursor-pointer">
           <div className="flex items-center text-black">
-            <Users className="h-6 w-6 mr-3" />
+            <img
+              src="https://d22pimhl2qmbj7.cloudfront.net/public/group_booking_1adcd0978a.svg?w=48&q=75"
+              className=" mr-3"
+              alt="Group Booking"
+            />
             <div>
               <h3 className="font-medium">Group Booking</h3>
               <p className="text-xs">Reach Out To Wonderla Team</p>
@@ -216,20 +201,11 @@ const Sidebar = ({ isOpen, onClose }) => {
         {/* Tour Operator Portal - Blue background */}
         <div className="p-4 border-b bg-blue-600 cursor-pointer">
           <div className="flex items-center text-white">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 mr-3"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-              <line x1="8" y1="21" x2="16" y2="21"></line>
-              <line x1="12" y1="17" x2="12" y2="21"></line>
-            </svg>
+            <img
+              src="https://d22pimhl2qmbj7.cloudfront.net/public/tour_portal_c097403085.svg?w=48&q=75"
+              className=" mr-3"
+              alt="Tour Operator"
+            />
             <div>
               <h3 className="font-medium">Tour Operator Portal</h3>
               <p className="text-xs">Reach Out To Wonderla Team</p>
@@ -240,7 +216,11 @@ const Sidebar = ({ isOpen, onClose }) => {
         {/* Partner With Us - Yellow background */}
         <div className="p-4 border-b bg-[#FFD700] cursor-pointer">
           <div className="flex items-center text-black">
-            <Users className="h-6 w-6 mr-3" />
+            <img
+              src="https://d22pimhl2qmbj7.cloudfront.net/public/group_booking_1adcd0978a.svg?w=48&q=75"
+              className=" mr-3"
+              alt="Partner"
+            />
             <div>
               <h3 className="font-medium">Partner With Us</h3>
               <p className="text-xs">Reach Out To Wonderla Team</p>
@@ -251,7 +231,11 @@ const Sidebar = ({ isOpen, onClose }) => {
         {/* About Us Section */}
         <div className="flex items-center justify-between p-4 border-b cursor-pointer">
           <div className="flex items-center text-blue-600">
-            <Info className="h-6 w-6 mr-3" />
+            <img
+              src="https://d22pimhl2qmbj7.cloudfront.net/public/unlink_1_bb57b8aa2f.svg?w=32&q=75"
+              className=" mr-3"
+              alt="About Us"
+            />
             <div>
               <h3 className="font-medium">About Us</h3>
               <p className="text-xs text-gray-600">Know all about Wonderla</p>
@@ -266,7 +250,11 @@ const Sidebar = ({ isOpen, onClose }) => {
             onClick={() => toggleSection("quickLinks")}
           >
             <div className="flex items-center text-blue-600">
-              <Link2 className="h-6 w-6 mr-3" />
+              <img
+                src="https://d22pimhl2qmbj7.cloudfront.net/public/about_us_3ae10e9512.svg?w=32&q=75"
+                className=" mr-3"
+                alt="Quick Links"
+              />
               <div>
                 <h3 className="font-medium">Quick Links</h3>
                 <p className="text-xs text-gray-600">
@@ -302,7 +290,11 @@ const Sidebar = ({ isOpen, onClose }) => {
         {/* Contact Us Section */}
         <div className="flex items-center justify-between p-4 border-b cursor-pointer">
           <div className="flex items-center text-blue-600">
-            <PhoneCall className="h-6 w-6 mr-3" />
+            <img
+              src="https://d22pimhl2qmbj7.cloudfront.net/public/support_1_f316ee7cce.svg?w=32&q=75"
+              className=" mr-3"
+              alt="Contact Us"
+            />
             <div>
               <h3 className="font-medium">Contact Us</h3>
               <p className="text-xs text-gray-600">
