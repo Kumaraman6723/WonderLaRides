@@ -18,9 +18,8 @@ const Sidebar = ({ isOpen, onClose }) => {
     <div
       className={`fixed top-0 right-0 w-full md:w-96 h-full bg-white overflow-y-auto z-50 transform transition-transform duration-300 ${
         isOpen ? "translate-x-0" : "translate-x-full"
-      }`}
+      } hide-scrollbar`}
     >
-      {/* Header with logo and close button */}
       {/* Header with logo and close button */}
       <div className="p-4 flex justify-between items-center border-b">
         <div className="logo">
@@ -51,7 +50,6 @@ const Sidebar = ({ isOpen, onClose }) => {
           </svg>
         </button>
       </div>
-
       <div className="p-4">
         {/* Parks Section with Dropdown */}
         <div className="border-b">
