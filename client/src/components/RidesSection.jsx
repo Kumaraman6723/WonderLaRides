@@ -174,7 +174,6 @@ const RidesSection = () => {
                 <motion.div
                   key={ride.id}
                   className="min-w-[260px] max-w-[260px] shrink-0"
-                  whileHover={{ scale: 1.05 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
                   <RideCard ride={ride} />
