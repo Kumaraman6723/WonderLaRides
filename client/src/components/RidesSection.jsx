@@ -172,7 +172,16 @@ const RidesSection = () => {
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
-              Explore All Rides!
+              <span
+                style={{
+                  color: "#334DCF",
+                  fontFamily: "Poppins, sans-serif",
+                  fontWeight: 600,
+                  fontSize: "14px",
+                }}
+              >
+                Explore All Rides!
+              </span>
             </motion.button>
           </div>
         </div>
