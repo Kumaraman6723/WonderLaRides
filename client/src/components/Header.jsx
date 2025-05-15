@@ -6,6 +6,8 @@ import {
   Building,
   Calendar,
   ChevronDown,
+  ChevronUp,
+
 } from "lucide-react";
 import Sidebar from "./Sidebar";
 import { motion, AnimatePresence } from "framer-motion";
